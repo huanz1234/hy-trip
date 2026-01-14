@@ -1,5 +1,7 @@
 :root {
     --color-primary: #ff9854;
+    /* 修改全局search图标颜色 */
+    --van-search-left-icon-color: var(--color-primary) !important;
 }
 
 body {

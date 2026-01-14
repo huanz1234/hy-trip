@@ -1,11 +1,22 @@
 <script setup>
+import HomeNavBar from './components/home-nav-bar.vue'
+import HomeSearchBox from './components/home-search-box.vue'
 </script>
 
 <template>
-    我是home页面
+  <div class="home">
+    <HomeNavBar></HomeNavBar>
+    <div class="banner">
+      <img src="@/assets/img/home/banner.webp" alt="" />
+    </div>
+    <HomeSearchBox></HomeSearchBox>
+  </div>
 </template>
 
-<style
-    lang="less"
-    scoped
-></style>
+<style lang="less" scoped>
+.banner {
+  img {
+    width: 100%;
+  }
+}
+</style>

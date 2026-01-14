@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { VantResolver } from '@vant/auto-import-resolver';    
+import { VantResolver } from '@vant/auto-import-resolver';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -23,5 +23,14 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
-  }
+  },
+  // server: {
+  //   proxy: {
+  //     '/baidu-api': {
+  //       target: 'https://api.map.baidu.com',
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/baidu-api/, ''),
+  //     },
+  //   },
+  // },
 })

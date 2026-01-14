@@ -1,14 +1,16 @@
 <script setup>
 import TabBar from '@/components/tabbar/tabbar_base_vant.vue'
-import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
+import { computed } from 'vue'
 
-const router = useRouter()
+const route = useRoute()
+const showTabBar = computed(() => !route.meta.hideTabBar)
 </script>
 
 <template>
   <div class="container">
     <router-view></router-view>
-    <TabBar></TabBar>
+    <TabBar v-if="showTabBar"></TabBar>
   </div>
 </template>
 
