@@ -8,10 +8,10 @@ const showTabBar = computed(() => !route.meta.hideTabBar)
 </script>
 
 <template>
-  <div class="container">
-    <router-view></router-view>
-    <TabBar v-if="showTabBar"></TabBar>
-  </div>
+    <div class="container">
+        <router-view></router-view>
+        <TabBar v-if="showTabBar"></TabBar>
+    </div>
 </template>
 
 <style scoped></style>
