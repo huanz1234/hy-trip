@@ -25,3 +25,12 @@ export function getPlacebyGeo(location) {
         }
     })
 }
+
+export function getHomeHouselist(page) {
+    return Hyrequest.get({
+        url: "/api/home/houselist",
+        params: {
+            page
+        }
+    })
+}
