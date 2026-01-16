@@ -1,5 +1,7 @@
 :root {
     --color-primary: #ff9854;
+    --line-color: #faf8f9;
+    --theme-linear-gradient: linear-gradient(90deg, #fa8c1d, #fcaf3f);
     /* 修改全局search图标颜色 */
     --van-search-left-icon-color: var(--color-primary) !important;
 }
@@ -7,4 +9,8 @@
 body {
     font-size: 14px;
     font-family: 'Microsoft YaHei', sans-serif;
+}
+
+.bottom-gray-line {
+    border-bottom: 1px solid var(--line-color);
 }

@@ -19,6 +19,7 @@ const cityStore = useCityStore()
 const router = useRouter()
 const handleClick = (city) => {
     cityStore.currentCity = city
+    cityStore.isUserSelected = true
     router.back()
 }
 </script>

@@ -7,6 +7,8 @@ export const useCityStore = defineStore('city', {
         currentCity: {
             cityName: '北京',
         },
+        myPosition: '我的位置',
+        isUserSelected: false,
     }),
     actions: {
         async getAllCities() {
