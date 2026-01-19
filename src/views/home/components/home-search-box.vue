@@ -2,9 +2,11 @@
 import { useRouter } from 'vue-router'
 import { useCityStore } from '@/stores/modules/city'
 import { useHomeStore } from '@/stores/modules/home'
-import { ref, onMounted } from 'vue'
-import { formatMonthDay, getDiffDays } from '@/utils/format_data'
+import { ref, onMounted, computed } from 'vue'
+import { formatMonthDay, getDiffDays } from '@/utils/format_date'
 import { getPlacebyGeo } from '@/service/modules/home'
+import { useMainStore } from '@/stores/modules/main'
+import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 const jumpToCity = () => {
@@ -14,12 +16,12 @@ const jumpToCity = () => {
 const handleClickLocation = () => {
     navigator.geolocation.getCurrentPosition(
         (position) => {
-            console.log(position)
+            // console.log(position)
             // 经度在前,纬度在后
             const location = `${position.coords.longitude},${position.coords.latitude}`
-            console.log(location)
+            // console.log(location)
             getPlacebyGeo(location).then((res) => {
-                console.log(res)
+                // console.log(res)
                 if (res.status === '1') {
                     const district = res.regeocode.addressComponent.district
                     const city = res.regeocode.addressComponent.city
@@ -42,12 +44,11 @@ onMounted(() => {
 const cityStore = useCityStore()
 
 // 日期相关
-const nowDay = new Date()
-const startday = ref(formatMonthDay(nowDay))
-const newday = nowDay.setDate(nowDay.getDate() + 1)
-const endDay = ref(formatMonthDay(newday))
-const stayday = ref(1)
-
+const mainStore = useMainStore()
+const { startDate, endDate } = storeToRefs(mainStore)
+const startDateStr = computed(() => formatMonthDay(startDate.value))
+const endDateStr = computed(() => formatMonthDay(endDate.value))
+const stayday = computed(() => getDiffDays(startDate.value, endDate.value))
 const show = ref(false)
 
 // 确认选择日期
@@ -56,9 +57,8 @@ const onConfirm = (value) => {
     const selectStartDate = value[0]
     const selectEndDate = value[1]
 
-    startday.value = formatMonthDay(selectStartDate)
-    endDay.value = formatMonthDay(selectEndDate)
-    stayday.value = getDiffDays(selectStartDate, selectEndDate)
+    mainStore.startDate = selectStartDate
+    mainStore.endDate = selectEndDate
 }
 
 // 热门建议
@@ -70,8 +70,8 @@ const searchBtnClick = () => {
     router.push({
         path: '/search',
         query: {
-            startDate: startday.value,
-            endDate: endDay.value,
+            startDate: startDateStr.value,
+            endDate: endDateStr.value,
             currentCity: cityStore.currentCity.cityName,
         },
     })
@@ -93,12 +93,12 @@ const searchBtnClick = () => {
         <div class="section date-range bottom-gray-line" @click="show = true">
             <div class="start">
                 <span class="tip">入住</span>
-                <span class="time">{{ startday }}</span>
+                <span class="time">{{ startDateStr }}</span>
             </div>
             <div class="stay">共{{ stayday }}晚</div>
             <div class="end">
                 <span class="tip">退房</span>
-                <span class="time">{{ endDay }}</span>
+                <span class="time">{{ endDateStr }}</span>
             </div>
         </div>
 

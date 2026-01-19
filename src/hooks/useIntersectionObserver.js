@@ -78,9 +78,9 @@ export function useIntersectionObserver(options = {}) {
         observer = new IntersectionObserver(
             (entries) => {
                 const entry = entries[0]
-                console.log(isIntersecting.value)
+                // console.log(isIntersecting.value)
                 isIntersecting.value = entry.isIntersecting
-                console.log(isIntersecting.value)
+                // console.log(isIntersecting.value)
             },
             options
         )
