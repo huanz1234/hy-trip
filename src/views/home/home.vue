@@ -19,11 +19,6 @@ import SearchBar from '@/components/search-bar/search-bar.vue'
 // })
 
 const homeStore = useHomeStore()
-const scrollTop = ref(0)
-
-const handleScroll = () => {
-    scrollTop.value = document.documentElement.scrollTop || document.body.scrollTop
-}
 
 // 新写法：hook 只提供 isIntersecting，由这里用 watch 管理回调
 const { targetRef: loadMoreRef, isIntersecting } = useIntersectionObserver({
@@ -38,6 +33,10 @@ watch(isIntersecting, (value) => {
     }
 })
 
+const scrollTop = ref(0)
+const handleScroll = () => {
+    scrollTop.value = document.documentElement.scrollTop || document.body.scrollTop
+}
 const isShowSearchBar = computed(() => scrollTop.value >= 360)
 
 // 分层架构,关于home页面的网络请求全部在此处请求
