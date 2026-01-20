@@ -28,11 +28,11 @@ import { useRouter } from 'vue-router'
 const homeStore = useHomeStore()
 const { houselist } = storeToRefs(homeStore)
 
-// const router = useRouter()
-// const itemClick = (item) => {
-//     // 跳转到Detail页面
-//     router.push('/detail/' + item.houseId)
-// }
+const router = useRouter()
+const itemClick = (item) => {
+    // 跳转到Detail页面
+    router.push('/detail/' + item.houseId)
+}
 </script>
 
 <style lang="less" scoped>

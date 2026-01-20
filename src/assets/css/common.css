@@ -3,6 +3,7 @@
     --line-color: #faf8f9;
     --theme-linear-gradient: linear-gradient(90deg, #fa8c1d, #fcaf3f);
     /* 修改全局search图标颜色 */
+    /* --van-primary-color: var(--color-primary); */
     --van-search-left-icon-color: var(--color-primary) !important;
 }
 
@@ -13,4 +14,12 @@ body {
 
 .bottom-gray-line {
     border-bottom: 1px solid var(--line-color);
+}
+
+.top-page {
+    position: relative;
+    z-index: 9;
+    height: 100vh;
+    background-color: #fff;
+    overflow-y: auto;
 }
