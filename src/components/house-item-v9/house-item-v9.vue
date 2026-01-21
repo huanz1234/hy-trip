@@ -18,6 +18,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useAttrs } from 'vue'
 
 const props = defineProps({
     itemData: {

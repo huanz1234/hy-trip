@@ -16,6 +16,7 @@
     "dayjs": "^1.11.19",
     "normalize.css": "^8.0.1",
     "pinia": "^3.0.4",
+    "underscore": "^1.13.7",
     "vant": "^4.9.22",
     "vue": "^3.5.26",
     "vue-router": "^4.6.4"

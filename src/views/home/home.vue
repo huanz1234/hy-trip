@@ -1,11 +1,12 @@
 <script setup>
 import { onMounted, onUnmounted, watch, computed, ref } from 'vue'
+import { useHomeStore } from '@/stores/modules/home'
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+
 import HomeNavBar from './components/home-nav-bar.vue'
 import HomeSearchBox from './components/home-search-box.vue'
 import HomeCategories from './components/home-categories.vue'
 import HomeContent from './components/home-content.vue'
-import { useHomeStore } from '@/stores/modules/home'
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import SearchBar from '@/components/search-bar/search-bar.vue'
 // import useScroll from '@/hooks/useIntersectionObserver'
 
