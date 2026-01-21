@@ -10,7 +10,11 @@ const showTabBar = computed(() => !route.meta.hideTabBar)
 
 <template>
     <div class="container">
-        <router-view></router-view>
+        <router-view v-slot="props">
+            <keep-alive include="home">
+                <component :is="props.Component" />
+            </keep-alive>
+        </router-view>
         <TabBar v-if="showTabBar"></TabBar>
         <Loading></Loading>
     </div>

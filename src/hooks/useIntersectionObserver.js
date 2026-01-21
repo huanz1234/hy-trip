@@ -74,20 +74,22 @@ export function useIntersectionObserver(options = {}) {
     const isIntersecting = ref(false)
     let observer = null
 
-    onMounted(() => {
+    const createObserver = () => {
+        if (observer) return
         observer = new IntersectionObserver(
             (entries) => {
                 const entry = entries[0]
-                // console.log(isIntersecting.value)
                 isIntersecting.value = entry.isIntersecting
-                // console.log(isIntersecting.value)
             },
             options
         )
-
         if (targetRef.value) {
             observer.observe(targetRef.value)
         }
+    }
+
+    onMounted(() => {
+        createObserver()
     })
 
     onUnmounted(() => {
@@ -98,9 +100,7 @@ export function useIntersectionObserver(options = {}) {
     })
 
     onActivated(() => {
-        if (targetRef.value) {
-            observer.observe(targetRef.value)
-        }
+        createObserver()
     })
 
     onDeactivated(() => {

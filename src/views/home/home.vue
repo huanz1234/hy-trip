@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, watch, computed, ref } from 'vue'
+import { onMounted, onUnmounted, watch, computed, ref, onActivated,onDeactivated } from 'vue'
 import { useHomeStore } from '@/stores/modules/home'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
@@ -45,16 +45,30 @@ onMounted(() => {
     homeStore.getHomeHotSuggestsAction()
     homeStore.getHomeCategoriesAction()
     homeStore.getHouselistData()
-    window.addEventListener('scroll', handleScroll)
 })
 
-onUnmounted(() => {
+// 使用 onActivated 和 onDeactivated 来管理滚动监听和位置恢复
+onActivated(() => {
+    window.addEventListener('scroll', handleScroll)
+    // 恢复滚动位置
+    if (scrollTop.value > 0) {
+        window.scrollTo({
+            top: scrollTop.value,
+        })
+    }
+})
+
+onDeactivated(() => {
     window.removeEventListener('scroll', handleScroll)
 })
 </script>
-
+<script>
+export default {
+    name: 'home',
+}
+</script>
 <template>
-    <div class="home">
+    <div class="home" ref="homeRef">
         <HomeNavBar></HomeNavBar>
         <div class="banner">
             <img src="@/assets/img/home/banner.webp" alt="" />
